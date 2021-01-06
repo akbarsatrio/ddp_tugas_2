@@ -1,0 +1,2 @@
+REK556,Akbar Satrio,200000
+REK173,Putri,1000000

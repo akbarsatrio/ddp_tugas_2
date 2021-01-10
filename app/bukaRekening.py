@@ -14,8 +14,9 @@ def main():
   setoranAwal = input('Masukan Setoran Awal : Rp. ')
   # Generate nomor rekening lewat random string
   norekNasabah = "REK" + ''.join(random.choice(string.digits) for _ in range(3))
+  pinNasabah = int(input('Masukan PIN'))
   # simpan ketiga variabel ke dalam variabel data
-  data = (norekNasabah+','+namaNasabah+','+setoranAwal+'\n')
+  data = (norekNasabah+','+namaNasabah+','+setoranAwal+','+pinNasabah+'\n')
   # buka file nasabah.txt dan simpan kedalam variabel file dengan permission 'a'
   file = open('data/nasabah.txt', 'a')
   # panggil variabel file lalu tulis menggunakan fungsi writelines dengan value variabel data

@@ -17,13 +17,16 @@ def main():
         setoranTunai = int(input('Masukan setoran tunai : '))
         if setoranTunai >= 10000:
           totalSetoran = int(checkNorek.getNasabahDataSaldo)+setoranTunai
-          currentData = [norekNasabah, checkNorek.getNasabahDataNama, str(totalSetoran)+'\n']
+          currentData = [norekNasabah, checkNorek.getNasabahDataNama, str(totalSetoran), pinNasabah+'\n']
           checkNorek.getNasabahData[checkNorek.getNasabahDataIndex] = ','.join(currentData)
           openNasabahWrite = open('data/nasabah.txt', 'w')
           for dataInput in checkNorek.getNasabahData:
             openNasabahWrite.writelines(dataInput)
           openNasabahWrite.close()
           print('Setoran tunai berhasil, total saldo Anda sekarang Rp.', totalSetoran)
+          print('Tekan Enter untuk ke menu')
+          input()
+          index.main()
           return False
         else:
           print('Minimum setoran adalah Rp. 10000')

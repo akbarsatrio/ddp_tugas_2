@@ -32,8 +32,7 @@ def main():
           print('Minimum setoran adalah Rp. 10000')
           pass
     else:
-      print('Nomor rekening tidak ditemukan :(')
-      loop = False
+      print('PIN atau nomor rekening Anda salah')
 
 
 def checkNorek(norekNasabah, pinNasabah):

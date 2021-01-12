@@ -16,18 +16,22 @@ def main():
         print()
         tarikTunai = int(input('Masukan nominal yang akan ditarik : Rp. '))
         if tarikTunai >= 50000:
-          totalSaldo = int(checkNorek.getNasabahSaldo)-tarikTunai
-          currentData = [norekNasabah, checkNorek.getNasabahNama, str(totalSaldo), pinNasabah+'\n']
-          checkNorek.getNasabahData[checkNorek.getNasabahIndex] = ','.join(currentData)
-          openNasabahWrite = open('data/nasabah.txt', 'w')
-          for dataInput in checkNorek.getNasabahData:
-            openNasabahWrite.writelines(dataInput)
-          openNasabahWrite.close()
-          print('Tarik tunai berhasil, total saldo Anda sekarang Rp.', totalSaldo)
-          print('Tekan Enter untuk ke menu')
-          input()
-          index.main()
-          return False
+          if int(checkNorek.getNasabahSaldo) >= tarikTunai:
+            totalSaldo = int(checkNorek.getNasabahSaldo)-tarikTunai
+            currentData = [norekNasabah, checkNorek.getNasabahNama, str(totalSaldo), pinNasabah+'\n']
+            checkNorek.getNasabahData[checkNorek.getNasabahIndex] = ','.join(currentData)
+            openNasabahWrite = open('data/nasabah.txt', 'w')
+            for dataInput in checkNorek.getNasabahData:
+              openNasabahWrite.writelines(dataInput)
+            openNasabahWrite.close()
+            print('Tarik tunai berhasil, total saldo Anda sekarang Rp.', totalSaldo)
+            print('Tekan Enter untuk ke menu')
+            input()
+            index.main()
+            return False
+          else:
+            print('Saldo anda tidak mencukupi')
+            pass
         else:
           print('Tarik tunai minimal Rp. 50000')
           pass
@@ -50,6 +54,7 @@ def checkNorek(norekNasabah, pinNasabah): #fungsi checkNorek untuk memvalidasi n
       if nasabahData[3] == pinNasabah+'\n': #jika nasabah data index 3 (rekening) sama dengan pinNasabah (input), maka...
         checkNorek.getNasabahNama = nasabahData[1]
         checkNorek.getNasabahSaldo = nasabahData[2]
+        print('Nomor rekening', norekNasabah, 'a/n', nasabahData[1], 'dengan saldo Rp.', nasabahData[2], end="")
         return True #kembalikan nilai True
       else:
         pass

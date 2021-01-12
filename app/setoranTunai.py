@@ -14,7 +14,7 @@ def main():
     if checkNorek(norekNasabah, pinNasabah) is True:
       while True:
         print()
-        setoranTunai = int(input('Masukan setoran tunai : '))
+        setoranTunai = int(input('Masukan setoran tunai : Rp. '))
         if setoranTunai >= 10000:
           totalSetoran = int(checkNorek.getNasabahDataSaldo)+setoranTunai
           currentData = [norekNasabah, checkNorek.getNasabahDataNama, str(totalSetoran), pinNasabah+'\n']

@@ -16,7 +16,7 @@ def main(status = True, params = ''):
   print('[6] Keluar \n')
   if status == False: print('Nomor', params, ' tidak ada di menu, silahkan coba lagi')
   try: inp = int(input('Masukan pilihan Anda : '))
-  except ValueError: menu()
+  except ValueError: main()
   pilihMenu(params = inp)
 
 def pilihMenu(params):

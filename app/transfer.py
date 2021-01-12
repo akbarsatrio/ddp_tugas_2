@@ -72,7 +72,7 @@ def checkNorek(norekNasabah, pinNasabah): #definisikan checkNorek dengan paramet
     else:
       checkNorek.getNasabahIndex += 1
       pass
-  openNasabah.close()
+  openNasabah.close() #tutup file openNasabah
 
 def checkNorekTujuan(norekTujuan):
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

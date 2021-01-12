@@ -8,7 +8,7 @@ import app.tarikTunai as tarikTunai
 import app.transfer as transfer
 
 def main():
-  print('*** TRANSFER ***')
+  print('\n*** TRANSFER ***')
   while True: #menjalankan perulangan dengan kondisi True
     norekNasabah = input('Masukan nomor rekening Anda : ')  #memasukan nomor rekening sumber/nasabah
     pinNasabah = getpass.getpass('Masukan PIN : ')  #memasukan pin rekening sumber/nasabah
@@ -18,37 +18,39 @@ def main():
         norekTujuan = input('Masukan nomor rekening tujuan : ') #input norek tujuan
         if checkNorekTujuan(norekTujuan) is True: #panggil funsgi check norek tujuan dan jika mengembalikan nilai true, maka...
           nominalTransfer = int(input('Masukan nominal yang akan di transfer : Rp. '))  #masukan nominal transfer
-          if int(checkNorek.getNasabahSaldo) >= nominalTransfer:  #ambil data saldo nasabah di fungsi check norek
-            totalUangNasabah = int(checkNorek.getNasabahSaldo)-nominalTransfer  #kurangi data saldo nasabah dengan nominal jumlah transfer lalu masukan kedalam total uang nasabah
-            totalUangTujuan = int(checkNorekTujuan.getTujuanDataSaldo)+nominalTransfer  #tambahkan data saldo tujuan dengan nominal transfer lalu simpan kedalam total uang tujuan
-            currentDataNasabah = [norekNasabah, checkNorek.getNasabahNama, str(totalUangNasabah), pinNasabah+'\n']  #buat data nasabah sumber yang baru/diubah dan simpan kedalam variabel currentDataNasabah dengan tipe data list
-            currentDataTujuan = [norekTujuan, checkNorekTujuan.getTujuanNama, str(totalUangTujuan), checkNorekTujuan.getTujuanPin]  #buat data nasbaah tujuan yang baru/diubah dan simpan kedalam variabel currentDataTUjuan dengan tipe data list
-            checkNorek.getNasabahData[checkNorek.getNasabahIndex] = ','.join(currentDataNasabah)  #panggil variabel getNasabahData di fungsi checkNorek serta index nasabah sumber pada checkNorek.getNasabahIndex, lalu valuenya diganti dengan currentDataNasabah
-            checkNorek.getNasabahData[checkNorekTujuan.getTujuanIndex] = ','.join(currentDataTujuan)  #panggil variabel getNasabahData di fungsi checkNorek serta index nasabah tujuan pada checkNorekTujuan.getTujuanIndex, lalu valuenya diganti dengan currentDataTujuan
-            openNasabahWrite = open('data/nasabah.txt', 'w')  #buka file nasabah txt dengan permission write lalu simpan kedalam openNasabahWrite
-            for dataInput in checkNorek.getNasabahData: #loop value dari checkNorek.getNasabahData sebagai variabel dataInput
-              openNasabahWrite.writelines(dataInput)  #panggil variabel openNasabahWrite lalu tulis dengan fungsi writelines dengan value dataInput, otomatis file nasabah.txt akan ditimpa semuanya dengan dataInput
-            openNasabahWrite.close()  #tutup file jika aksi sudah selesai
-            openTransfer = open('data/transfer.txt', 'a') #sekarang buka file transfer, dengan permisssion file 'a'
-            dataTransfer = ['TRF'+''.join(random.choice(string.digits) for _ in range(3)), norekNasabah, norekTujuan, str(nominalTransfer)+'\n']  #buat dataTransfer ddengan value kode unik transfer, norek nasabah, norek tujuan, nominal transfer
-            openTransfer.writelines(','.join(dataTransfer)) #tulis data transfer ke openTransfer menggunakan fungsi writelines
-            openTransfer.close()  #tutup jika aksi sudah selesai
-            print('Transfer berhasil, total saldo Anda sekarang Rp.', totalUangNasabah)
-            print('Tekan Enter untuk ke menu')
-            input()
-            index.main()
-            return False
+          if nominalTransfer >= 10000:
+            if int(checkNorek.getNasabahSaldo) >= nominalTransfer:  #ambil data saldo nasabah di fungsi check norek
+              totalUangNasabah = int(checkNorek.getNasabahSaldo)-nominalTransfer  #kurangi data saldo nasabah dengan nominal jumlah transfer lalu masukan kedalam total uang nasabah
+              totalUangTujuan = int(checkNorekTujuan.getTujuanDataSaldo)+nominalTransfer  #tambahkan data saldo tujuan dengan nominal transfer lalu simpan kedalam total uang tujuan
+              currentDataNasabah = [norekNasabah, checkNorek.getNasabahNama, str(totalUangNasabah), pinNasabah+'\n']  #buat data nasabah sumber yang baru/diubah dan simpan kedalam variabel currentDataNasabah dengan tipe data list
+              currentDataTujuan = [norekTujuan, checkNorekTujuan.getTujuanNama, str(totalUangTujuan), checkNorekTujuan.getTujuanPin]  #buat data nasbaah tujuan yang baru/diubah dan simpan kedalam variabel currentDataTUjuan dengan tipe data list
+              checkNorek.getNasabahData[checkNorek.getNasabahIndex] = ','.join(currentDataNasabah)  #panggil variabel getNasabahData di fungsi checkNorek serta index nasabah sumber pada checkNorek.getNasabahIndex, lalu valuenya diganti dengan currentDataNasabah
+              checkNorek.getNasabahData[checkNorekTujuan.getTujuanIndex] = ','.join(currentDataTujuan)  #panggil variabel getNasabahData di fungsi checkNorek serta index nasabah tujuan pada checkNorekTujuan.getTujuanIndex, lalu valuenya diganti dengan currentDataTujuan
+              openNasabahWrite = open('data/nasabah.txt', 'w')  #buka file nasabah txt dengan permission write lalu simpan kedalam openNasabahWrite
+              for dataInput in checkNorek.getNasabahData: #loop value dari checkNorek.getNasabahData sebagai variabel dataInput
+                openNasabahWrite.writelines(dataInput)  #panggil variabel openNasabahWrite lalu tulis dengan fungsi writelines dengan value dataInput, otomatis file nasabah.txt akan ditimpa semuanya dengan dataInput
+              openNasabahWrite.close()  #tutup file jika aksi sudah selesai
+              openTransfer = open('data/transfer.txt', 'a') #sekarang buka file transfer, dengan permisssion file 'a'
+              dataTransfer = ['TRF'+''.join(random.choice(string.digits) for _ in range(3)), norekNasabah, norekTujuan, str(nominalTransfer)+'\n']  #buat dataTransfer ddengan value kode unik transfer, norek nasabah, norek tujuan, nominal transfer
+              openTransfer.writelines(','.join(dataTransfer)) #tulis data transfer ke openTransfer menggunakan fungsi writelines
+              openTransfer.close()  #tutup jika aksi sudah selesai
+              print('Transfer berhasil, total saldo Anda sekarang Rp.', totalUangNasabah)
+              print('Tekan Enter untuk ke menu')
+              input()
+              index.main()
+              return False
+            else:
+              print('Saldo tidak mencukupi. Transfer gagal')
+              print('Tekan enter untuk ke menu')
+              input()
+              index.main()
+              return False
           else:
-            print('Saldo tidak mencukupi. Transfer gagal')
-            print('Tekan enter untuk ke menu')
-            input()
-            index.main()
-            return False
+            print('Minimum transfer Rp. 10000')  
         else:
           print('Nomor rekening tujuan tidak ditemukan :(')
     else:
       print('PIN atau nomor rekening Anda salah')
-      pass
 
 def checkNorek(norekNasabah, pinNasabah): #definisikan checkNorek dengan parameter norekNasabah dan pinNasabah
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

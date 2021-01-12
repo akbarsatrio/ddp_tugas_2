@@ -29,6 +29,7 @@ def main():
           index.main()
           return False
         else:
+          print('Tarik tunai minimal Rp. 50000')
           pass
     else:
       print('PIN atau nomor rekening Anda salah')

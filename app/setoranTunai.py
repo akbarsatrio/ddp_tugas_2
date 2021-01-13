@@ -9,7 +9,7 @@ import app.transfer as transfer
 def main():
   print('\n*** SETOR TUNAI ***')
   while True:
-    norekNasabah = input('Masukan Nomor Rekening : ')
+    norekNasabah = input('Masukan Nomor Rekening : ').upper()
     pinNasabah = getpass.getpass('Masukan PIN : ')
     if checkNorek(norekNasabah, pinNasabah) is True:
       while True:

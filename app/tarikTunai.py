@@ -9,7 +9,7 @@ import app.transfer as transfer
 def main():
   print('\n*** TARIK TUNAI ***')
   while True: #perulangan while dengan kondisi True, ini digunakan ketika pengguna memasukan input yang mengeluarkan nilai False, maka akan terus berulang
-    norekNasabah = input('Masukan nomor rekening Anda : ')  #norek nasabah untuk memasukan nomor rekening nasabah
+    norekNasabah = input('Masukan nomor rekening Anda : ').upper()  #norek nasabah untuk memasukan nomor rekening nasabah
     pinNasabah = getpass.getpass('Masukan PIN Anda : ') #norek nasabah untuk memasukan pin rekening nasabah
     if checkNorek(norekNasabah, pinNasabah) is True:  #jika fungsi checkNorek mengembalikan nilai True, maka..
       while True:
@@ -24,7 +24,7 @@ def main():
             for dataInput in checkNorek.getNasabahData:
               openNasabahWrite.writelines(dataInput)
             openNasabahWrite.close()
-            print('Tarik tunai berhasil, total saldo Anda sekarang Rp.', totalSaldo)
+            print('Tarik tunai Rp.', tarikTunai, 'berhasil. Total saldo Anda sekarang Rp.', totalSaldo)
             print('Tekan Enter untuk ke menu')
             input()
             index.main()

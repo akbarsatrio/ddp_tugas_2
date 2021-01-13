@@ -10,13 +10,13 @@ import app.transfer as transfer
 def main():
   print('\n*** TRANSFER ***')
   while True: #menjalankan perulangan dengan kondisi True
-    norekNasabah = input('Masukan nomor rekening Anda : ')  #memasukan nomor rekening sumber/nasabah
+    norekNasabah = input('Masukan nomor rekening Anda : ').upper()  #memasukan nomor rekening sumber/nasabah
     pinNasabah = getpass.getpass('Masukan PIN : ')  #memasukan pin rekening sumber/nasabah
     if checkNorek(norekNasabah, pinNasabah) is True:  #panggil fungsi checknorek dengan parameter norek nasabah dan pin nasabah
       while True: #jika fungsi diatas mengembalikan nilai true, maka jalankan perulangan while ke-2 dengan kondisi True
         print()
-        norekTujuan = input('Masukan nomor rekening tujuan : ') #input norek tujuan
-        if checkNorekTujuan(norekTujuan) is True: #panggil funsgi check norek tujuan dan jika mengembalikan nilai true, maka...
+        norekTujuan = input('Masukan nomor rekening tujuan : ').upper() #input norek tujuan
+        if checkNorekTujuan(norekTujuan) is True and norekNasabah != norekTujuan: #panggil funsgi check norek tujuan dan jika mengembalikan nilai true, maka...
           nominalTransfer = int(input('Masukan nominal yang akan di transfer : Rp. '))  #masukan nominal transfer
           if nominalTransfer >= 10000:
             if int(checkNorek.getNasabahSaldo) >= nominalTransfer:  #ambil data saldo nasabah di fungsi check norek

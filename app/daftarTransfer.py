@@ -21,19 +21,17 @@ def main():
             print(dataTransferResult, end="")
           else:
             pass
-        print('\nTekan Enter untuk ke menu')
-        input()
-        index.main()
-        return False
+        break
       else:
         print('Tidak ada data yang ditampilkan')
+        break
     else:
       print('PIN atau nomor rekening Anda salah')
+  print('\nTekan Enter untuk ke menu')
+  input()
+  index.main()  #panggil fungsi main pada file index
 
 def checkNorek(norekNasabah, pinNasabah): #fungsi checkNorek untuk memvalidasi nomor rekening di dalam nasabah.txt
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  # nama variabel yang diawali dengan nama fungsi itu sendiri agar variabelnya bisa dipanggil di fungsi lain  #
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   openNasabah = open('data/nasabah.txt')  #buka file nasabah.txt lalu simpan kedalam variabel openNasabah
   checkNorek.getNasabahData = openNasabah.readlines() #buat variabel getNasabahData dengan value openNasabah.readlines()
   for nasabahData in checkNorek.getNasabahData: #loop value dari checkNorek.getNasabahData sebagai nasabahData
@@ -48,9 +46,6 @@ def checkNorek(norekNasabah, pinNasabah): #fungsi checkNorek untuk memvalidasi n
   openNasabah.close() #tutup file openNasabah
 
 def checkTransfer(norekNasabah):
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  # nama variabel yang diawali dengan nama fungsi itu sendiri agar variabelnya bisa dipanggil di fungsi lain  #
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   openTransfer = open('data/transfer.txt')  #buka file transfer.txt lalu simpan kedalam variabel openTransfer
   checkTransfer.getTransferData = openTransfer.readlines()  #buat variabel getTransferData dengan value openTransfer.readlines()
   for transferData in checkTransfer.getTransferData:  #loop value dari checkTransfer.getTransfer sebagai nasabahData

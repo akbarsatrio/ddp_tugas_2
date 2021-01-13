@@ -16,7 +16,7 @@ def main():
       while True: #jika fungsi diatas mengembalikan nilai true, maka jalankan perulangan while ke-2 dengan kondisi True
         print()
         norekTujuan = input('Masukan nomor rekening tujuan : ').upper() #input norek tujuan
-        if checkNorekTujuan(norekTujuan) is True and norekNasabah != norekTujuan: #panggil funsgi check norek tujuan dan jika mengembalikan nilai true, maka...
+        if checkNorekTujuan(norekTujuan, norekNasabah) is True: #panggil funsgi check norek tujuan dan jika mengembalikan nilai true, maka...
           nominalTransfer = int(input('Masukan nominal yang akan di transfer : Rp. '))  #masukan nominal transfer
           if nominalTransfer >= 10000:
             if int(checkNorek.getNasabahSaldo) >= nominalTransfer:  #ambil data saldo nasabah di fungsi check norek
@@ -35,27 +35,22 @@ def main():
               openTransfer.writelines(','.join(dataTransfer)) #tulis data transfer ke openTransfer menggunakan fungsi writelines
               openTransfer.close()  #tutup jika aksi sudah selesai
               print('Transfer berhasil, total saldo Anda sekarang Rp.', totalUangNasabah)
-              print('Tekan Enter untuk ke menu')
-              input()
-              index.main()
-              return False
+              break #stop untuk mengakhiri kondisi
             else:
               print('Saldo tidak mencukupi. Transfer gagal')
-              print('Tekan enter untuk ke menu')
-              input()
-              index.main()
-              return False
+              break
           else:
             print('Minimum transfer Rp. 10000')  
         else:
           print('Nomor rekening tujuan tidak ditemukan :(')
+      break
     else:
       print('PIN atau nomor rekening Anda salah')
+  print('Tekan enter untuk ke menu')
+  input()
+  index.main()
 
 def checkNorek(norekNasabah, pinNasabah): #definisikan checkNorek dengan parameter norekNasabah dan pinNasabah
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  # nama variabel yang diawali dengan nama fungsi itu sendiri agar variabelnya bisa dipanggil di fungsi lain  #
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   openNasabah = open('data/nasabah.txt')  #buka file nasabah.txt dan simpan kedalam openNasabah
   checkNorek.getNasabahData = openNasabah.readlines() #buat variabel getNasabahData dengan value openNasabah.readlines()
   checkNorek.getNasabahIndex = 0  #ini untuk menampung index ke berapa dalam data nasabah (untuk foreign key norek sumber)
@@ -76,10 +71,7 @@ def checkNorek(norekNasabah, pinNasabah): #definisikan checkNorek dengan paramet
       pass
   openNasabah.close() #tutup file openNasabah
 
-def checkNorekTujuan(norekTujuan):
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  # nama variabel yang diawali dengan nama fungsi itu sendiri agar variabelnya bisa dipanggil di fungsi lain  #
-  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+def checkNorekTujuan(norekTujuan, norekNasabah): #fungsinya hampir sama seperti cekNorek, jadi tidak perlu ditambah komentar
   openNorekTujuan = open('data/nasabah.txt') #buka file nasabah.txt dan simpan kedalam openNasabah
   checkNorekTujuan.getNorekTujuanData = openNorekTujuan.readlines()
   checkNorekTujuan.getTujuanIndex = 0
@@ -88,7 +80,7 @@ def checkNorekTujuan(norekTujuan):
   checkNorekTujuan.getTujuanPin = ''
   for nasabahTujuanData in checkNorekTujuan.getNorekTujuanData:
     nasabahTujuanData = nasabahTujuanData.split(',')
-    if nasabahTujuanData[0] == norekTujuan:
+    if nasabahTujuanData[0] == norekTujuan and norekNasabah != nasabahTujuanData[0]:  #jika nasabahTujuanData sama dengan norekTujuan dan norekNasabah tidak sama dengan nasabahTujuanData
       checkNorekTujuan.getTujuanNama = nasabahTujuanData[1]
       checkNorekTujuan.getTujuanDataSaldo = nasabahTujuanData[2]
       checkNorekTujuan.getTujuanPin = nasabahTujuanData[3]
@@ -97,4 +89,5 @@ def checkNorekTujuan(norekTujuan):
     else:
       checkNorekTujuan.getTujuanIndex += 1
       pass
+  openNorekTujuan.close()
     

@@ -11,7 +11,7 @@ def main():
   print('\n*** BUKA REKENING ***')
   while True:
     namaNasabah = input('Masukan nama : ')  #input untuk memasukan Nama
-    if len(namaNasabah) > 0:
+    if len(namaNasabah) > 0:  #validasi panjang nama harus diatas 0
       while True: #perulangan tanpa henti jika pengguna memasukan input yang nilainya false
         print('[ PIN HARUS 6 DIGIT ]')
         pinNasabah = getpass.getpass('Buat PIN Anda : ')  #buat pin nasabah dengan fungsi getpass
@@ -28,17 +28,13 @@ def main():
               break #stop
             else:
               print('Masukan jumlah setoran minimal Rp.10000\n')  #jika setoran dibawah 10rb, balik lagi ke while
-              pass
           else:
             print('\nKonfirmasi PIN anda salah')
-            pass
         else:
           print('\nPanjang pin harus 6')
-          pass
       break
     else:
       print('\nNama tidak boleh kosong')
-      pass
   print('\nPembukaan rekening dengan nomor', norekNasabah, 'atas nama', namaNasabah, 'berhasil.')
   print('Tekan enter untuk ke menu')
   input()

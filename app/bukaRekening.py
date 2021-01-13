@@ -35,6 +35,7 @@ def main():
         else:
           print('\nPanjang pin harus 6')
           pass
+      break
     else:
       print('\nNama tidak boleh kosong')
       pass

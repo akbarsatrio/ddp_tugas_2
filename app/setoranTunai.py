@@ -16,9 +16,9 @@ def main():
         print()
         setoranTunai = int(input('Masukan setoran tunai : Rp. '))
         if setoranTunai >= 10000:
-          totalSetoran = int(checkNorek.getNasabahDataSaldo)+setoranTunai
-          currentData = [norekNasabah, checkNorek.getNasabahDataNama, str(totalSetoran), pinNasabah+'\n']
-          checkNorek.getNasabahData[checkNorek.getNasabahDataIndex] = ','.join(currentData)
+          totalSetoran = int(checkNorek.getNasabahSaldo)+setoranTunai
+          currentData = [norekNasabah, checkNorek.getNasabahNama, str(totalSetoran), pinNasabah+'\n']
+          checkNorek.getNasabahData[checkNorek.getNasabahIndex] = ','.join(currentData)
           openNasabahWrite = open('data/nasabah.txt', 'w')
           for dataInput in checkNorek.getNasabahData:
             openNasabahWrite.writelines(dataInput)
@@ -38,20 +38,20 @@ def main():
 def checkNorek(norekNasabah, pinNasabah):
   openNasabah = open('data/nasabah.txt')
   checkNorek.getNasabahData = openNasabah.readlines()
-  checkNorek.getNasabahDataIndex = 0
-  checkNorek.getNasabahDataNama = ''
-  checkNorek.getNasabahDataSaldo = 0
+  checkNorek.getNasabahIndex = 0
+  checkNorek.getNasabahNama = ''
+  checkNorek.getNasabahSaldo = 0
   for nasabahData in checkNorek.getNasabahData:
     nasabahData = nasabahData.split(',')
     if nasabahData[0] == norekNasabah:
       if nasabahData[3] == pinNasabah+'\n':
-        checkNorek.getNasabahDataNama = nasabahData[1]
-        checkNorek.getNasabahDataSaldo = nasabahData[2]
+        checkNorek.getNasabahNama = nasabahData[1]
+        checkNorek.getNasabahSaldo = nasabahData[2]
         print('Nomor rekening', norekNasabah, 'a/n', nasabahData[1], 'dengan saldo Rp.', nasabahData[2], end="")
         return True
       else:
         pass
     else:
-      checkNorek.getNasabahDataIndex += 1
+      checkNorek.getNasabahIndex += 1
       pass
   openNasabah.close()
